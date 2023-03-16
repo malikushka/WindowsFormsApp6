@@ -58,6 +58,7 @@
     <Compile Include="Operator.cs" />
     <Compile Include="OperatorContainer.cs" />
     <Compile Include="OperatorMethod.cs" />
+    <Compile Include="Polygon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
