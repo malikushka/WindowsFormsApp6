@@ -13,11 +13,13 @@ namespace WindowsFormsApp6
 {
     public partial class Form1 : Form
     {
-        Rectangle rectangle;
+        My_Figure my_figure;
+        Figure figure;
         private Stack<Operator> operators = new Stack<Operator>();
         private Stack<Operand> operands = new Stack<Operand>();
         bool flag = true;
         string name;
+        
 
         public Form1()
         {
@@ -32,7 +34,7 @@ namespace WindowsFormsApp6
         }
         private bool IsNotOperation(char item)
         {
-            if (!(item == 'R' || item == 'M' || item == 'D' || item == ',' || item == '(' || item == ')'))
+            if (!(item == 'O' || item == 'M' || item == 'D' || item == ',' || item == '(' || item == ')'))
             {
                 return true;
             }
@@ -86,7 +88,7 @@ namespace WindowsFormsApp6
                         continue;
                     }
 
-                    else if (textBoxInputString.Text[i] == 'R')
+                    else if (textBoxInputString.Text[i] == 'O')
                     {
                         this.operators.Push(OperatorContainer.FindOperator(textBoxInputString.Text[i]));
                         continue;
@@ -103,8 +105,118 @@ namespace WindowsFormsApp6
                     }
                     else if (textBoxInputString.Text[i] == '(')
                     {
+                        this.operators.Push(OperatorContainer.FindOperator(textBoxInputString.Text[i]));
+                        continue;
+                    }
+                    else if (textBoxInputString.Text[i] == ')')
+                    {
+                        do
+                        {
+                            if (operators.Peek().symbolOperator == '(')
+                            {
+                                operators.Pop();
+                                break;
+                            }
+                            if (operators.Count == 0)
+                            {
+                                break;
+                            }
+                        }
+                        while (operators.Peek().symbolOperator != '(');
                     }
                 }
+//try
+                {
+                    this.SelectingPerformingOperation(operators.Peek());
+                }
+                
+                //catch
+                //{
+                //    MessageBox.Show("Проверьте водимые данные!");
+                //    listBox1.Text += "Ошибка!\n";
+                //}
+            }
+        }
+        private void SelectingPerformingOperation(Operator operat)
+        {
+            if (textBoxInputString.Text[0] == 'O')
+            {
+                int h = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                int w = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                int y = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                int x = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+
+                string name = Convert.ToString(operands.Pop().value);
+                if (x + w < Init.pictureBox1.Width && y + w < Init.pictureBox1.Height)
+                {
+
+                    figure = new My_Figure(x,y,w,h);
+                    operat = new Operator(figure.Draw, 'O');
+                    ShapeContainer.AddFigure(figure);
+                    listBox1.Text += "Моя фигура" + figure + " Создалась\n";
+                    operat.operatorMethod();
+
+                }
+
+                else
+                {
+
+                    MessageBox.Show("Выход за границы!");
+                    listBox1.Text += "Выход за границы!\n";
+                }
+
+            }
+            if (textBoxInputString.Text[0] == 'M')
+            {
+                try
+                {
+                    int y = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                    int x = Convert.ToInt32(Convert.ToString(operands.Pop().value));
+                    name = Convert.ToString(operands.Pop().value);
+                    string movename = "Моя фигура" + name + " Переместилась\n";
+                    if (ShapeContainer.FindFigure(name) == null)
+                    {
+                        MessageBox.Show("Проверьте ввводимые данные!");
+                        listBox1.Text += "Проверьте ввводимые данные!\n";
+
+                    }
+                    else
+                    {
+                        ShapeContainer.FindFigure(name).MoveTo(x, y);
+
+                        listBox1.Text += movename + "\n";
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Должнобыть ровно 3 параметра!");
+                    listBox1.Text += "Ошибка!\n";
+                }
+            }
+            if (textBoxInputString.Text[0] == 'D')
+            {
+                try
+                {
+                 name = Convert.ToString(operands.Pop().value);
+                string deletename = "Моя фигурала" + name + "Удалилась";
+                if (ShapeContainer.FindFigure(name) == null)
+                {
+                    MessageBox.Show("Проверьте вводимые данные!");
+                    listBox1.Text += " Ошибка\n";
+                }
+                else
+                {
+                    ShapeContainer.FindFigure(name).DeleteF(ShapeContainer.FindFigure(name), true);
+                    listBox1.Text += ShapeContainer.FindFigure(name) + deletename;
+                }
+                }
+                catch
+                {
+                    MessageBox.Show("Возникла ошибка,проверьте вводимые символы!");
+                    listBox1.Text += "Ошибка!\n";
+                }
+
+
 
 
 
