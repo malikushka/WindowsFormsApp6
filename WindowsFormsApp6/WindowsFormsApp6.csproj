@@ -55,6 +55,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="My_Figure.cs" />
+    <Compile Include="Operand.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="OperatorContainer.cs" />
     <Compile Include="OperatorMethod.cs" />
@@ -63,7 +64,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Triangle.cs" />
-    <Compile Include="Опр.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
