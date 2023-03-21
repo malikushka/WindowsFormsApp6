@@ -47,7 +47,7 @@ namespace WindowsFormsApp6
         public int y;
         public int width;
         public int height;
-        internal string name;
+        public string name;
 
 
         abstract public void Draw();

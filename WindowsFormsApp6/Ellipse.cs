@@ -22,7 +22,7 @@ namespace WindowsFormsApp6
             g.DrawEllipse(Init.pen, this.x, this.y, this.width, this.height);
             Init.pictureBox1.Image = Init.bitmap;
         }
-        public override void MoveTo(int x, int y)
+        public override void MoveTo( int x, int y)
         {
             if (!((this.x + x < 0 && this.y + y < 0) || (this.y + y < 0) || (this.x + x > Init.pictureBox1.Width - 1 && this.y + y < 0) ||
                (this.x + this.width + x > Init.pictureBox1.Width - 1) || (this.x + x > Init.pictureBox1.Width - 1 && this.y + y > Init.pictureBox1.Height - 1) ||

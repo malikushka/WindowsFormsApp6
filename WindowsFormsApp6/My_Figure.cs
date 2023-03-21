@@ -24,7 +24,7 @@ namespace WindowsFormsApp6
             Init.pictureBox1.Image = Init.bitmap;
         }
 
-        public My_Figure(int x, int y, int w, int h)
+        public My_Figure(string name,int x, int y, int w, int h)
         {
             this.c1 = new Ellipse(x + w / 3, y, w / 3, h / 4);
             this.r1 = new Rectangle(x, y + h * 1 / 4, w, h / 6);
@@ -41,6 +41,7 @@ namespace WindowsFormsApp6
             this.y = y;
             this.width = w;
             this.height = h;
+            this.name = name;
 
         }
 
@@ -82,8 +83,8 @@ namespace WindowsFormsApp6
                 this.x += x;
                 this.y += y;
                 r1.MoveTo(x, y);
-                c1.MoveTo(x, y);
-                t1.MoveTo(x, y);
+                c1.MoveTo( x, y);
+                t1.MoveTo( x, y);
 
 
                

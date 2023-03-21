@@ -14,16 +14,16 @@ namespace WindowsFormsApp6
     public partial class Form1 : Form
     {
         My_Figure my_figure;
-        Figure figure;
         private Stack<Operator> operators = new Stack<Operator>();
         private Stack<Operand> operands = new Stack<Operand>();
         bool flag = true;
         string name;
-        
+        ShapeContainer shapecontainer;
 
         public Form1()
         {
             InitializeComponent();
+            shapecontainer = new ShapeContainer();
             Bitmap bitmap = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             Pen pen = new Pen(Color.Black, 1);
             Init.bitmap = bitmap;
@@ -125,16 +125,16 @@ namespace WindowsFormsApp6
                         while (operators.Peek().symbolOperator != '(');
                     }
                 }
-//try
+                try
                 {
                     this.SelectingPerformingOperation(operators.Peek());
                 }
-                
-                //catch
-                //{
-                //    MessageBox.Show("Проверьте водимые данные!");
-                //    listBox1.Text += "Ошибка!\n";
-                //}
+
+                catch
+                {
+                    MessageBox.Show("Проверьте водимые данные!");
+                    listBox1.Text += "Ошибка!\n";
+                }
             }
         }
         private void SelectingPerformingOperation(Operator operat)
@@ -150,10 +150,10 @@ namespace WindowsFormsApp6
                 if (x + w < Init.pictureBox1.Width && y + w < Init.pictureBox1.Height)
                 {
 
-                    figure = new My_Figure(x,y,w,h);
-                    operat = new Operator(figure.Draw, 'O');
-                    ShapeContainer.AddFigure(figure);
-                    listBox1.Text += "Моя фигура" + figure + " Создалась\n";
+                    my_figure = new My_Figure(name,x,y,w,h);
+                    operat = new Operator(my_figure.Draw, 'O');
+                    ShapeContainer.AddFigure(my_figure);
+                    listBox1.Items.Add  ("Моя фигура" + my_figure.name + " Создалась\n");
                     operat.operatorMethod();
 
                 }
@@ -206,7 +206,7 @@ namespace WindowsFormsApp6
                 }
                 else
                 {
-                    ShapeContainer.FindFigure(name).DeleteF(ShapeContainer.FindFigure(name), true);
+                                      ShapeContainer.FindFigure(name).DeleteF(ShapeContainer.FindFigure(name), true);
                     listBox1.Text += ShapeContainer.FindFigure(name) + deletename;
                 }
                 }
