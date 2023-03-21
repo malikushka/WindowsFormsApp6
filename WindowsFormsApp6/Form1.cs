@@ -133,7 +133,7 @@ namespace WindowsFormsApp6
                 catch
                 {
                     MessageBox.Show("Проверьте водимые данные!");
-                    listBox1.Text += "Ошибка!\n";
+                    listBox1.Items.Add ("Ошибка!\n");
                 }
             }
         }
@@ -153,7 +153,7 @@ namespace WindowsFormsApp6
                     my_figure = new My_Figure(name,x,y,w,h);
                     operat = new Operator(my_figure.Draw, 'O');
                     ShapeContainer.AddFigure(my_figure);
-                    listBox1.Items.Add  ("Моя фигура" + my_figure.name + " Создалась\n");
+                    listBox1.Items.Add  ("Моя фигура " + my_figure.name + " "  + "cоздалась\n");
                     operat.operatorMethod();
 
                 }
@@ -162,7 +162,7 @@ namespace WindowsFormsApp6
                 {
 
                     MessageBox.Show("Выход за границы!");
-                    listBox1.Text += "Выход за границы!\n";
+                    listBox1.Items.Add ( "Выход за границы!\n");
                 }
 
             }
@@ -173,24 +173,24 @@ namespace WindowsFormsApp6
                     int y = Convert.ToInt32(Convert.ToString(operands.Pop().value));
                     int x = Convert.ToInt32(Convert.ToString(operands.Pop().value));
                     name = Convert.ToString(operands.Pop().value);
-                    string movename = "Моя фигура" + name + " Переместилась\n";
-                    if (ShapeContainer.FindFigure(name) == null)
+                    string movename = "Моя фигура " + my_figure.name + " " + "переместилась\n";
+                    if (ShapeContainer.FindFigure(my_figure.name) == null)
                     {
                         MessageBox.Show("Проверьте ввводимые данные!");
-                        listBox1.Text += "Проверьте ввводимые данные!\n";
+                        listBox1.Items.Add ("Проверьте ввводимые данные!\n");
 
                     }
                     else
                     {
-                        ShapeContainer.FindFigure(name).MoveTo(x, y);
+                        ShapeContainer.FindFigure(my_figure.name).MoveTo(x, y);
 
-                        listBox1.Text += movename + "\n";
+                        listBox1.Items.Add(movename + "\n");
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Должнобыть ровно 3 параметра!");
-                    listBox1.Text += "Ошибка!\n";
+                //    MessageBox.Show("Должнобыть ровно 3 параметра!");
+                //    listBox1.Items.Add("Ошибка!\n");
                 }
             }
             if (textBoxInputString.Text[0] == 'D')
@@ -198,22 +198,22 @@ namespace WindowsFormsApp6
                 try
                 {
                  name = Convert.ToString(operands.Pop().value);
-                string deletename = "Моя фигурала" + name + "Удалилась";
-                if (ShapeContainer.FindFigure(name) == null)
+                string deletename = "Моя фигура " + my_figure.name + " " + "удалилась\n";
+                if (ShapeContainer.FindFigure(my_figure.name) == null)
                 {
                     MessageBox.Show("Проверьте вводимые данные!");
-                    listBox1.Text += " Ошибка\n";
+                    listBox1.Items.Add("Ошибка!\n");
                 }
                 else
                 {
-                                      ShapeContainer.FindFigure(name).DeleteF(ShapeContainer.FindFigure(name), true);
-                    listBox1.Text += ShapeContainer.FindFigure(name) + deletename;
+                     ShapeContainer.FindFigure(my_figure.name).DeleteF(ShapeContainer.FindFigure(my_figure.name), true);
+                    listBox1.Items.Add(ShapeContainer.FindFigure(my_figure.name) + deletename );
                 }
                 }
                 catch
                 {
                     MessageBox.Show("Возникла ошибка,проверьте вводимые символы!");
-                    listBox1.Text += "Ошибка!\n";
+                    listBox1.Items.Add("Ошибка!\n");
                 }
 
 
